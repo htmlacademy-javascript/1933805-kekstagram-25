@@ -7,7 +7,7 @@ const NAMES = [
   'Д`Артаньян',
 
 ];
-const MESSAGES=[
+const MESSAGES = [
   ' Всё отлично!',
   ' В целом всё неплохо. Но не всё.',
   ' Когда вы делаете фотографию, хорошо бы убирать палец из кадра.',
@@ -18,5 +18,5 @@ const MESSAGES=[
   'Как можно было поймать такой неудачный момент?!'
 ];
 const DESCRIPTION = 'на отдыхе';
-export{NAMES,MESSAGES,DESCRIPTION};
+export { NAMES, MESSAGES, DESCRIPTION };
 

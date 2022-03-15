@@ -1,7 +1,3 @@
 
-import {getData} from './data.js';
-import {renderImg } from './thumbnailRendering.js';
-getData();
-renderImg();
-
-
+import { getFullImg } from './fullImg.js';
+getFullImg();

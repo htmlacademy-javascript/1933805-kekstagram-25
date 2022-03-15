@@ -10,4 +10,4 @@ function checkStringLength(string, length) {
 }
 checkStringLength('as', 3);
 
-export{getRandomPositiveInteger};
+export { getRandomPositiveInteger };
