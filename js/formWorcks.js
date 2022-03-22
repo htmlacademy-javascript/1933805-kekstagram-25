@@ -42,7 +42,7 @@ function clickAddImg() {
     body.classList.add('modal-open');
   });
 }
-//кнопки сброса.
+//кнопки сброса
 uploadCancel.addEventListener('click', () => {
   formRedactImg.classList.add('hidden');
 
