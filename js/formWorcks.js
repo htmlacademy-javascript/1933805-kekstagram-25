@@ -12,7 +12,6 @@ const img = imgUploadPreview.querySelector('img');
 const hashtags = document.querySelector('.text__hashtags');
 const socialFooterText = document.querySelector('.text__description');
 const form = document.querySelector('.img-upload__form');
-const pristine = new Pristine(form);
 const MINSIZE = 25;
 const MAXSIZE = 100;
 const STEP = 25;
@@ -21,27 +20,48 @@ const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
 
 //пристин
+const pristine = new Pristine(form, {
+  classTo: 'img-upload__text',
+  errorTextParent: 'img-upload__text',
+
+});
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   const isValid = pristine.validate();
-
-  if (isValid && re.test(hashtags.value)) {
+  if (isValid && re.test(hashtags.value) || hashtags.value === '') {
     //console.log('Можно отправлять');
   } else {
     //console.log('Форма невалидна');
   }
-
 });
 
+function validateHashTag() {
+  if (re.test(hashtags.value)) {
+    return true;
+  }
+}
+
+pristine.addValidator(
+  form.querySelector('.text__hashtags'),
+  validateHashTag,
+  'Не корректное введение хэш-тега '
+);
 //открытие загрузки изображения.
+
 function clickAddImg() {
-  buttonLoadImg.addEventListener('click', () => {
-    formRedactImg.classList.remove('hidden');
-    body.classList.add('modal-open');
+  buttonLoadImg.addEventListener('change', () => {
+    openForm();
   });
 }
+
+function openForm() {
+  formRedactImg.classList.remove('hidden');
+  body.classList.add('modal-open');
+}
+
+
 //кнопки сброса.
 uploadCancel.addEventListener('click', () => {
   formRedactImg.classList.add('hidden');
