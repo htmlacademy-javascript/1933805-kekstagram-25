@@ -35,7 +35,7 @@ form.addEventListener('submit', (evt) => {
 
 });
 
-//открытие загрузки изображения
+//открытие загрузки изображения.
 function clickAddImg() {
   buttonLoadImg.addEventListener('click', () => {
     formRedactImg.classList.remove('hidden');
