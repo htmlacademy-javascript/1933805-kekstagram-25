@@ -16,7 +16,8 @@ const MINSIZE = 25;
 const MAXSIZE = 100;
 const STEP = 25;
 scaleControlValue.value = `${MAXSIZE}%`;
-const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+//const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+const re = new RegExp(/^#(?=.*[^0-9])[a-zа-яё0-9]{1,19}$/i);
 
 
 //пристин
@@ -30,23 +31,30 @@ form.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   const isValid = pristine.validate();
-  if (isValid && re.test(hashtags.value) || hashtags.value === '') {
-    //console.log('Можно отправлять');
+  if (isValid ) {
+    console.log('Можно отправлять');
   } else {
-    //console.log('Форма невалидна');
+    console.log('Форма невалидна');
   }
 });
 
-function validateHashTag() {
-  if (re.test(hashtags.value)) {
-    return true;
+function validateHashTag(value) {
+  const hashtags5 =value.split(' ');
+ const valueBad =hashtags5.filter((item,index,array)=>{
+  return !re.test(item)||item.length>20||array.indexOf(item)!==index;
+ });
+if (value ===''){
+  return true};
+
+ return (valueBad.length>0||hashtags5.length>5) ? false :true;
   }
-}
+
 
 pristine.addValidator(
   form.querySelector('.text__hashtags'),
   validateHashTag,
-  'Не корректное введение хэш-тега '
+  'Не корректное введение хэш-тега ',
+  false
 );
 //открытие загрузки изображения.
 
