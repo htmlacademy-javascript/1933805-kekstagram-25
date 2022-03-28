@@ -16,6 +16,78 @@ const getData = () => {
           avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
           message: MESSAGES[getRandomPositiveInteger(0, MESSAGES.length - 1)],
           name: NAMES[getRandomPositiveInteger(0, 4)]
+        },
+        {
+          id: getRandomPositiveInteger(1, 100),
+          avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+          message: MESSAGES[getRandomPositiveInteger(0, MESSAGES.length - 1)],
+          name: NAMES[getRandomPositiveInteger(0, 4)]
+        },
+        {
+          id: getRandomPositiveInteger(1, 100),
+          avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+          message: MESSAGES[getRandomPositiveInteger(0, MESSAGES.length - 1)],
+          name: NAMES[getRandomPositiveInteger(0, 4)]
+        },
+        {
+          id: getRandomPositiveInteger(1, 100),
+          avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+          message: MESSAGES[getRandomPositiveInteger(0, MESSAGES.length - 1)],
+          name: NAMES[getRandomPositiveInteger(0, 4)]
+        },
+        {
+          id: getRandomPositiveInteger(1, 100),
+          avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+          message: MESSAGES[getRandomPositiveInteger(0, MESSAGES.length - 1)],
+          name: NAMES[getRandomPositiveInteger(0, 4)]
+        },
+        {
+          id: getRandomPositiveInteger(1, 100),
+          avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+          message: MESSAGES[getRandomPositiveInteger(0, MESSAGES.length - 1)],
+          name: NAMES[getRandomPositiveInteger(0, 4)]
+        },
+        {
+          id: getRandomPositiveInteger(1, 100),
+          avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+          message: MESSAGES[getRandomPositiveInteger(0, MESSAGES.length - 1)],
+          name: NAMES[getRandomPositiveInteger(0, 4)]
+        },
+        {
+          id: getRandomPositiveInteger(1, 100),
+          avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+          message: MESSAGES[getRandomPositiveInteger(0, MESSAGES.length - 1)],
+          name: NAMES[getRandomPositiveInteger(0, 4)]
+        },
+        {
+          id: getRandomPositiveInteger(1, 100),
+          avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+          message: MESSAGES[getRandomPositiveInteger(0, MESSAGES.length - 1)],
+          name: NAMES[getRandomPositiveInteger(0, 4)]
+        },
+        {
+          id: getRandomPositiveInteger(1, 100),
+          avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+          message: MESSAGES[getRandomPositiveInteger(0, MESSAGES.length - 1)],
+          name: NAMES[getRandomPositiveInteger(0, 4)]
+        },
+        {
+          id: getRandomPositiveInteger(1, 100),
+          avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+          message: MESSAGES[getRandomPositiveInteger(0, MESSAGES.length - 1)],
+          name: NAMES[getRandomPositiveInteger(0, 4)]
+        },
+        {
+          id: getRandomPositiveInteger(1, 100),
+          avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+          message: MESSAGES[getRandomPositiveInteger(0, MESSAGES.length - 1)],
+          name: NAMES[getRandomPositiveInteger(0, 4)]
+        },
+        {
+          id: getRandomPositiveInteger(1, 100),
+          avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+          message: MESSAGES[getRandomPositiveInteger(0, MESSAGES.length - 1)],
+          name: NAMES[getRandomPositiveInteger(0, 4)]
         }
       ],
     });
