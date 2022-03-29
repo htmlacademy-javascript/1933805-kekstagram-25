@@ -73,6 +73,8 @@ function creatingCommentList(index) {
     }
     if (counter === index.comments.length) {
       socialCommentsLoader.classList.add('hidden');
+    } else {
+      socialCommentsLoader.classList.remove('hidden');
     }
   };
 }

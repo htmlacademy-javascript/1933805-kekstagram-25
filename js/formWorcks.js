@@ -32,22 +32,25 @@ form.addEventListener('submit', (evt) => {
 
   const isValid = pristine.validate();
   if (isValid) {
-    console.log('Можно отправлять');
+    //console.log('Можно отправлять');
   } else {
-    console.log('Форма невалидна');
+    //console.log('Форма невалидна');
   }
 });
 
 function validateHashTag(value) {
   const hashtags5 = value.split(' ');
-  const valueBad = hashtags5.filter((item, index, array) => {
-    return !re.test(item) || item.length > 20 || array.indexOf(item) !== index;
-  });
+  const valueBad = hashtags5.filter((item, index, array) => !re.test(item) || item.length > 20 || array.indexOf(item) !== index);
   if (value === '') {
     return true;
-  };
+  }
 
-  return (valueBad.length > 0 || hashtags5.length > 5) ? false : true;
+  if (valueBad.length > 0 || hashtags5.length > 5) {
+    return false;
+  } else {
+    return true;
+  }
+
 }
 
 
