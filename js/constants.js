@@ -17,6 +17,6 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают.',
   'Как можно было поймать такой неудачный момент?!'
 ];
-const DESCRIPTION = 'на отдыхе';
+const DESCRIPTION = 'На отдыхе.';
 export { NAMES, MESSAGES, DESCRIPTION };
 
