@@ -1,5 +1,5 @@
-
-
+// import {noUiSlider} from './nouislider/nouislider.js';
+// import noUiSlider  from '../nouislider/nouislider.js';
 const buttonLoadImg = document.querySelector('#upload-file');
 const body = document.querySelector('body');
 const formRedactImg = document.querySelector('.img-upload__overlay');
@@ -112,4 +112,15 @@ controlBigger.addEventListener('click', () => {
   img.style.transform = `scale(${size / 100})`;
 });
 
+//module9-task1/ СЛАЙДЕР ЭФФЕКТОВ.
+const effectSlider = document.querySelector('.effect-level__slider');
+noUiSlider.create(effectSlider, {
+  range: {
+    min: 0,
+    max: 100,
+  },
+  start: 100,
+
+});
+// console.log(effectSlider);
 export { clickAddImg };

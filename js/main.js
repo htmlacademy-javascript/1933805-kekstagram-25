@@ -5,3 +5,5 @@ import{clickAddImg} from './formWorcks.js';
 const data = getData();
 renderImg(data);
 clickAddImg();
+
+
