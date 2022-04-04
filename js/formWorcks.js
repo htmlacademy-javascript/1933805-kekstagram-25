@@ -17,6 +17,12 @@ const STEP = 25;
 scaleControlValue.value = `${MAXSIZE}%`;
 const re = new RegExp(/^#(?=.*[^0-9])[a-zа-яё0-9]{1,19}$/i);
 
+const sliderElement = document.querySelector('.effect-level__slider');
+const effectsList = document.querySelectorAll('.effects__radio');
+const effectLevelValue = document.querySelector('.effect-level__value');
+const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
+
+
 
 //**************Пристин********************
 const pristine = new Pristine(form, {
@@ -180,12 +186,6 @@ const photoFilters = {
   }
 };
 
-const sliderElement = document.querySelector('.effect-level__slider');
-const effectsList = document.querySelectorAll('.effects__radio');
-const effectLevelValue = document.querySelector('.effect-level__value');
-const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
-
-
 noUiSlider.create(sliderElement, {
   range: {
     min: 0,
@@ -199,6 +199,7 @@ noUiSlider.create(sliderElement, {
 sliderElement.noUiSlider.on('update', () => {
   img.style.filter = photoFilters.getTotalString(sliderElement.noUiSlider.get());
   effectLevelValue.value = sliderElement.noUiSlider.get();
+  imgUploadEffectLevel.classList.add('hidden');
 });
 
 const updateFilterSetting = (photoFilter) => {
