@@ -120,7 +120,7 @@ controlBigger.addEventListener('click', () => {
 
 //***********module9-task1/ СЛАЙДЕР ЭФФЕКТОВ.*************
 const NON_EFFECT_FIELD_ID = 'effect-none';
-
+imgUploadEffectLevel.classList.add('hidden');
 const photoFilters = {
   chrome : {
     name: 'grayscale',
@@ -182,6 +182,7 @@ const photoFilters = {
         return `${photoFilters.property  }(${  variable  }px)`;
       default:
         return `${photoFilters.property  }(${  variable  })`;
+
     }
   }
 };
@@ -199,7 +200,6 @@ noUiSlider.create(sliderElement, {
 sliderElement.noUiSlider.on('update', () => {
   img.style.filter = photoFilters.getTotalString(sliderElement.noUiSlider.get());
   effectLevelValue.value = sliderElement.noUiSlider.get();
-  imgUploadEffectLevel.classList.add('hidden');
 });
 
 const updateFilterSetting = (photoFilter) => {
