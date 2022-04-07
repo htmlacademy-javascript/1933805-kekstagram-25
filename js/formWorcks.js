@@ -16,12 +16,19 @@ const MAXSIZE = 100;
 const STEP = 25;
 scaleControlValue.value = `${MAXSIZE}%`;
 const re = new RegExp(/^#(?=.*[^0-9])[a-zа-яё0-9]{1,19}$/i);
-
 const sliderElement = document.querySelector('.effect-level__slider');
 const effectsList = document.querySelectorAll('.effects__radio');
 const effectLevelValue = document.querySelector('.effect-level__value');
 const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
+const successTemplate = document.querySelector('#success');
+const successMessage = successTemplate.content.querySelector('.success');
+const errTeamlate = document.querySelector('#error');
+const errMessage = errTeamlate.content.querySelector('.error');
 
+const closeForm = () => {
+  formRedactImg.classList.add('hidden');
+  body.classList.remove('modal-open');
+};
 
 
 //**************Пристин********************
@@ -31,16 +38,61 @@ const pristine = new Pristine(form, {
 
 });
 
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+const onSuccess = () => {
+  const fragment = successMessage.cloneNode(true);
+  closeForm();
 
-  const isValid = pristine.validate();
-  if (isValid) {
-    //console.log('Можно отправлять');
-  } else {
-    //console.log('Форма невалидна');
-  }
-});
+  document.body.appendChild(fragment);
+  const popButton = fragment.querySelector('.success__button');
+  popButton.addEventListener('click', () => {
+    fragment.remove();
+  });
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      evt.preventDefault();
+
+      fragment.remove();
+    }
+  });
+};
+
+const onError = () => {
+  const fragment = errMessage.cloneNode(true);
+  closeForm();
+
+  document.body.appendChild(fragment);
+  const popButton = fragment.querySelector('.error__button');
+  popButton.addEventListener('click', () => {
+    fragment.remove();
+  });
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      evt.preventDefault();
+      fragment.remove();
+    }
+  });
+};
+
+const setUserFormSubmit = () => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      const formData = new FormData(form);
+      fetch(
+        ' https://25.javascript.pages.academy/kekstagram ',
+        {
+          method: 'POST',
+          body: formData,
+        },
+
+      )
+        .then(() => onSuccess())
+        .catch(() => onError());
+    }
+  });
+};
 
 function validateHashTag(value) {
   const hashtags5 = value.split(' ');
@@ -77,6 +129,7 @@ function openForm() {
   scaleControlValue.value = `${MAXSIZE}%`;
   formRedactImg.classList.remove('hidden');
   body.classList.add('modal-open');
+  setUserFormSubmit();
 }
 
 
@@ -122,7 +175,7 @@ controlBigger.addEventListener('click', () => {
 const NON_EFFECT_FIELD_ID = 'effect-none';
 imgUploadEffectLevel.classList.add('hidden');
 const photoFilters = {
-  chrome : {
+  chrome: {
     name: 'grayscale',
     range: {
       min: 0,
@@ -132,7 +185,7 @@ const photoFilters = {
     step: 0.1,
     connect: 'lower',
   },
-  sepia : {
+  sepia: {
     name: 'sepia',
     range: {
       min: 0,
@@ -142,7 +195,7 @@ const photoFilters = {
     step: 0.1,
     connect: 'lower',
   },
-  marvin : {
+  marvin: {
     name: 'invert',
     range: {
       min: 0,
@@ -152,7 +205,7 @@ const photoFilters = {
     step: 1,
     connect: 'lower',
   },
-  phobos : {
+  phobos: {
     name: 'blur',
     range: {
       min: 0,
@@ -162,7 +215,7 @@ const photoFilters = {
     step: 0.1,
     connect: 'lower',
   },
-  heat : {
+  heat: {
     name: 'brightness',
     range: {
       min: 0,
@@ -174,14 +227,14 @@ const photoFilters = {
   },
   none: 'none',
   property: '',
-  getTotalString: function (variable){
-    switch(true){
+  getTotalString: function (variable) {
+    switch (true) {
       case (photoFilters.property === photoFilters.marvin.name):
-        return `${photoFilters.property  }(${  variable  }%)`;
+        return `${photoFilters.property}(${variable}%)`;
       case (photoFilters.property === photoFilters.phobos.name):
-        return `${photoFilters.property  }(${  variable  }px)`;
+        return `${photoFilters.property}(${variable}px)`;
       default:
-        return `${photoFilters.property  }(${  variable  })`;
+        return `${photoFilters.property}(${variable})`;
 
     }
   }
