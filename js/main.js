@@ -1,6 +1,9 @@
+import { renderKekstaPosts } from './render.js';
+import './forms.js';
+import './photo_filter.js';
+import './uploader.js';
+import { getData } from './api.js';
+import { setFiltersClick } from './render.js';
 
-import { renderImg } from './thumbnailRendering.js';
-import{clickAddImg} from './formWorcks.js';
-import { getfetchData } from './api.js';
-clickAddImg();
-getfetchData(renderImg);
+getData((kekstaposts) => { renderKekstaPosts(kekstaposts);setFiltersClick(kekstaposts);});
+
