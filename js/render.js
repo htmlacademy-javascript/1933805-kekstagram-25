@@ -1,12 +1,5 @@
-import {
-  getRandomIntegerNumber,
-  isEscapeKey } from './util.js';
-import {
-  COMMENTS_TO_SHOW,
-  FIRSTABLE_SHOWN_COMMENTS,
-  NUMBER_OF_RANDOM_POSTS,
-  UserFilterProps
-} from './data.js';
+import { getRandomIntegerNumber, isEscapeKey } from './util.js';
+import { COMMENTS_TO_SHOW, FIRSTABLE_SHOWN_COMMENTS, NUMBER_OF_RANDOM_POSTS, UserFilter } from './data.js';
 import { debounce } from './util.js';
 
 const bigPicture = document.querySelector('.big-picture');
@@ -39,7 +32,7 @@ const showBigPicture = () => {
   showCommentLoader();
 };
 
-function onEscapeKeydown (evt) {
+function onEscapeKeydown(evt) {
   if (isEscapeKey(evt)) {
     onCloseBtnClick();
   }
@@ -139,8 +132,8 @@ const renderKekstaPosts = (kekstaPosts) => {
   postsContainer.append(allKekstaPosts);
 };
 const randomSorting = (indexA, indexB) => {
-  const newIndexA = getRandomIntegerNumber()+indexA.id;
-  const newIndexB = getRandomIntegerNumber()+indexB.id;
+  const newIndexA = getRandomIntegerNumber() + indexA.id;
+  const newIndexB = getRandomIntegerNumber() + indexB.id;
   return newIndexA - newIndexB;
 };
 
@@ -153,18 +146,18 @@ const clearKekstaPosts = () => {
 
 const reRenderKekstaPosts = (kekstaPost, option) => {
   clearKekstaPosts();
-  switch(true) {
-    case (option === UserFilterProps.RANDOM):
+  switch (true) {
+    case (option === UserFilter.RANDOM):
       renderKekstaPosts(kekstaPost
         .slice(0, NUMBER_OF_RANDOM_POSTS)
         .sort(randomSorting));
       break;
-    case (option === UserFilterProps.DISCUSSED):
+    case (option === UserFilter.DISCUSSED):
       renderKekstaPosts(kekstaPost
         .slice()
         .sort(sortByComments));
       break;
-    case (option === UserFilterProps.DEFAULT):
+    case (option === UserFilter.DEFAULT):
       renderKekstaPosts(kekstaPost);
       break;
   }
@@ -185,4 +178,4 @@ const setFiltersClick = (kekstaposts) => {
   });
 };
 
-export {renderKekstaPosts, renderbigPicture, setFiltersClick};
+export { renderKekstaPosts, renderbigPicture, setFiltersClick };

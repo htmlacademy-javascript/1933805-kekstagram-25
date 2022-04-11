@@ -1,5 +1,6 @@
 import {
-  RERENDER_DELAY,REG_EXP_FOR_HASHTAGS_ARRAY,GET_DATA_ERROR_SHOWING_TIME,GET_RANDOM_INTEGER_DEFAULT_END, GET_RANDOM_INTEGER_DEFAULT_START} from './data.js';
+  RERENDER_DELAY, REG_EXP_FOR_HASHTAGS_ARRAY, GET_DATA_ERROR_SHOWING_TIME, GET_RANDOM_INTEGER_DEFAULT_END, GET_RANDOM_INTEGER_DEFAULT_START
+} from './data.js';
 import { returnToDefault } from './photo_filter.js';
 import { imgUploadOverlay } from './forms.js';
 
@@ -19,7 +20,7 @@ const getRandomIntegerNumber = (startNumber = GET_RANDOM_INTEGER_DEFAULT_START, 
 
 const checkStringLength = (currentString, maxLength) => currentString.length <= maxLength;
 
-function getHashtagsArray (hashtagsString) {
+function getHashtagsArray(hashtagsString) {
   return hashtagsString.split(REG_EXP_FOR_HASHTAGS_ARRAY);
 }
 
@@ -38,6 +39,8 @@ const getDataError = (errorText) => {
 const closeMessage = (message) => {
   message.remove();
   returnToDefault();
+  document.removeEventListener('keydown', () => {
+  });
 };
 
 const showFinalMessage = (messageProps) => {
@@ -55,9 +58,14 @@ const showFinalMessage = (messageProps) => {
   document.body.append(message);
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  document.addEventListener('keydown', () => {
+    if (isEscapeKey) {
+      closeMessage(message);
+    }
+  });
 };
 
-function debounce (callback, timeoutDelay = RERENDER_DELAY) {
+function debounce(callback, timeoutDelay = RERENDER_DELAY) {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);
@@ -70,5 +78,5 @@ const showImageFilters = () => {
 };
 
 export {
-  getRandomIntegerNumber,checkStringLength,getRandomArrayElement,getHashtagsArray,isEscapeKey, getDataError, showFinalMessage, debounce,showImageFilters
+  getRandomIntegerNumber, checkStringLength, getRandomArrayElement, getHashtagsArray, isEscapeKey, getDataError, showFinalMessage, debounce, showImageFilters
 };

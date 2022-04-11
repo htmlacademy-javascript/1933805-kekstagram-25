@@ -81,20 +81,20 @@ const photoFilters = {
   }
 };
 
-const SuccessMessageProps = {
+const SuccessMessage = {
   TEMPLATE_ID: '#success',
   TEMPLATE_CLASS: '.success',
   CLOSE_BUTTON_CLASS: '.success__button',
   MESSAGE_CONTAINER_CLASS: '.success__inner'
 };
-const ErrorMessageProps = {
+const ErrorMessage = {
   TEMPLATE_ID: '#error',
   TEMPLATE_CLASS: '.error',
   CLOSE_BUTTON_CLASS: '.error__button',
   MESSAGE_CONTAINER_CLASS: '.error__inner'
 };
 
-const UserFilterProps = {
+const UserFilter = {
   RANDOM: 'filter-random',
   DISCUSSED: 'filter-discussed',
   DEFAULT: 'filter-default'
@@ -102,5 +102,4 @@ const UserFilterProps = {
 
 export {
   MAX_NUMBER_OF_HASHTAGS, FIRSTABLE_SHOWN_COMMENTS, COMMENTS_TO_SHOW, photoFilters, getRandomArrayElement,
-  REG_EXP_FOR_HASHTAGS_ARRAY, SCALE_MAX_SIZE, SCALE_MIN_SIZE, SCALE_STEP, NON_EFFECT_FIELD_ID, DOWNLOAD_URL, UPLOAD_URL, GET_DATA_ERROR_SHOWING_TIME, SuccessMessageProps, ErrorMessageProps, GET_RANDOM_INTEGER_DEFAULT_END,REG_EXP_FOR_HASHTAGS, GET_RANDOM_INTEGER_DEFAULT_START, RERENDER_DELAY, NUMBER_OF_RANDOM_POSTS, UserFilterProps
-};
+  REG_EXP_FOR_HASHTAGS_ARRAY, SCALE_MAX_SIZE, SCALE_MIN_SIZE, SCALE_STEP, NON_EFFECT_FIELD_ID, DOWNLOAD_URL, UPLOAD_URL, GET_DATA_ERROR_SHOWING_TIME, SuccessMessage, ErrorMessage, GET_RANDOM_INTEGER_DEFAULT_END, REG_EXP_FOR_HASHTAGS, GET_RANDOM_INTEGER_DEFAULT_START, RERENDER_DELAY, NUMBER_OF_RANDOM_POSTS, UserFilter};
