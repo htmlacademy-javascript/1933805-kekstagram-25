@@ -16,6 +16,8 @@ const hashtagsInput = document.querySelector('.text__hashtags');
 const decriptionInput = document.querySelector('.text__description');
 const uploadForm = document.querySelector('.img-upload__form');
 const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
+const uploadFormButton = document.querySelector('.img-upload__submit');
+
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'text__hashtags-wrapper',
@@ -34,14 +36,19 @@ pristine.addValidator(
 
 uploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
+  uploadFormButton.setAttribute('disabled', true);
   if (pristine.validate()) {
     sendData(
       () => showFinalMessage(SuccessMessage),
       () => showFinalMessage(ErrorMessage),
-      new FormData(evt.target),
+      new FormData(evt.target)
     );
   }
 });
+
+const setRemoveAtribute = () => {
+  uploadFormButton.removeAttribute('disabled');
+};
 
 const onCancelBtnClick = () => {
   imgUploadOverlay.classList.add('hidden');
@@ -82,5 +89,5 @@ uploadedImage.addEventListener('change', (evt) => {
 });
 
 export {
-  showImgUpload,previewImage,imgUploadEffectLevel,hashtagsInput,decriptionInput,uploadedImage,imgUploadOverlay,uploadForm
+  setRemoveAtribute, showImgUpload, previewImage, imgUploadEffectLevel, hashtagsInput, decriptionInput, uploadedImage, imgUploadOverlay, uploadForm
 };
