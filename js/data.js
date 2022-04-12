@@ -94,7 +94,7 @@ const ErrorMessage = {
   MESSAGE_CONTAINER_CLASS: '.error__inner'
 };
 
- const UserFilter = {
+const UserFilter = {
   RANDOM: 'filter-random',
   DISCUSSED: 'filter-discussed',
   DEFAULT: 'filter-default'
