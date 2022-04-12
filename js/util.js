@@ -39,8 +39,6 @@ const getDataError = (errorText) => {
 const closeMessage = (message) => {
   message.remove();
   returnToDefault();
-  document.removeEventListener('keydown', () => {
-  });
 };
 
 const showFinalMessage = (messageProps) => {
@@ -58,11 +56,13 @@ const showFinalMessage = (messageProps) => {
   document.body.append(message);
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  document.addEventListener('keydown', () => {
-    if (isEscapeKey) {
+  document.addEventListener('keyup', onEscape);
+  function onEscape(evt) {
+    if (isEscapeKey(evt)) {
       closeMessage(message);
+      document.removeEventListener('keyup', onEscape);
     }
-  });
+  }
 };
 
 function debounce(callback, timeoutDelay = RERENDER_DELAY) {
