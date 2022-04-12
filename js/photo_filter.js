@@ -11,17 +11,17 @@ const scaleControlValue = document.querySelector('.scale__control--value');
 let scale = 1;
 
 scaleBiggerButton.addEventListener('click', () => {
-  if(scale < SCALE_MAX_SIZE){
-    scale +=SCALE_STEP;
-    scaleControlValue.value = `${scale*100}%`;
+  if (scale < SCALE_MAX_SIZE) {
+    scale += SCALE_STEP;
+    scaleControlValue.value = `${scale * 100}%`;
     previewImage.style.transform = `scale(${scale})`;
   }
 });
 
 scaleSmallerButton.addEventListener('click', () => {
-  if(scale > SCALE_MIN_SIZE){
-    scale -=SCALE_STEP;
-    scaleControlValue.value = `${scale*100 }%`;
+  if (scale > SCALE_MIN_SIZE) {
+    scale -= SCALE_STEP;
+    scaleControlValue.value = `${scale * 100}%`;
     previewImage.style.transform = `scale(${scale})`;
   }
 });
@@ -52,7 +52,7 @@ effectsList.forEach((effect) => {
   effect.addEventListener('click', (evt) => {
     const photoFilter = evt.target.id.split('-')[1];
     updateFilterSetting(photoFilter);
-    if (evt.target.id === NON_EFFECT_FIELD_ID){
+    if (evt.target.id === NON_EFFECT_FIELD_ID) {
       previewImage.style.filter = 'none';
       imgUploadEffectLevel.classList.add('hidden');
     }
@@ -60,6 +60,7 @@ effectsList.forEach((effect) => {
 });
 
 const returnToDefault = () => {
+  scale = 1;
   uploadForm.reset();
   previewImage.style.transform = 'scale(1)';
   previewImage.style.filter = 'none';
@@ -67,4 +68,3 @@ const returnToDefault = () => {
 };
 
 export { returnToDefault };
-

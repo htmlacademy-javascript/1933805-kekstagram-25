@@ -8,7 +8,7 @@ const bigPictureNumberOfLikes = bigPicture.querySelector('.likes-count');
 const bigPictureNumberOfComments = bigPicture.querySelector('.comments-count');
 const bigPictureComments = bigPicture.querySelector('.social__comments');
 const bigPictureDescription = bigPicture.querySelector('.social__caption');
-const kekstaPostTemplate = document.querySelector('#picture').content;
+const pictureTemplate = document.querySelector('#picture').content;
 const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel');
 const commentsLoader = bigPicture.querySelector('.social__comments-loader');
 const shownCommentsCount = bigPicture.querySelector('.comments-shown');
@@ -58,13 +58,13 @@ const clearComments = () => {
   const commentsToClear = bigPictureComments.querySelectorAll('li');
   commentsToClear.forEach((comment) => comment.remove());
 };
-const renderbigPicture = (kekstaPost) => {
+const renderbigPicture = (postData) => {
   const allCommentsOfPost = document.createDocumentFragment();
-  bigPictureImage.src = kekstaPost.url;
-  bigPictureNumberOfLikes.textContent = kekstaPost.likes;
-  bigPictureNumberOfComments.textContent = kekstaPost.comments.length;
-  bigPictureDescription.textContent = kekstaPost.description;
-  kekstaPost.comments.forEach((commentItem, i) => {
+  bigPictureImage.src = postData.url;
+  bigPictureNumberOfLikes.textContent = postData.likes;
+  bigPictureNumberOfComments.textContent = postData.comments.length;
+  bigPictureDescription.textContent = postData.description;
+  postData.comments.forEach((commentItem, i) => {
     const comment = renderComment(commentItem);
     if (i > FIRSTABLE_SHOWN_COMMENTS - 1) {
       comment.classList.add('hidden');
@@ -72,10 +72,10 @@ const renderbigPicture = (kekstaPost) => {
     allCommentsOfPost.append(comment);
   });
   clearComments();
-  if (kekstaPost.comments.length > FIRSTABLE_SHOWN_COMMENTS - 1) {
+  if (postData.comments.length > FIRSTABLE_SHOWN_COMMENTS - 1) {
     shownCommentsCount.textContent = FIRSTABLE_SHOWN_COMMENTS;
   } else {
-    shownCommentsCount.textContent = kekstaPost.comments.length;
+    shownCommentsCount.textContent = postData.comments.length;
     commentsLoader.classList.add('hidden');
   }
 
@@ -106,30 +106,30 @@ const onLoadMoreClick = () => {
 };
 commentsLoader.addEventListener('click', onLoadMoreClick);
 
-const createKekstaPost = (kekstaPost) => {
-  const kekstaPostToRender = kekstaPostTemplate.cloneNode(true);
-  const kekstaPostImage = kekstaPostToRender.querySelector('.picture__img');
-  const kekstaPostLikes = kekstaPostToRender.querySelector('.picture__likes');
-  const kekstaPostComments = kekstaPostToRender.querySelector('.picture__comments');
-  const kekstaPostToRenderLink = kekstaPostToRender.querySelector('a');
-  kekstaPostImage.src = kekstaPost.url;
-  kekstaPostLikes.textContent = kekstaPost.likes;
-  kekstaPostComments.textContent = kekstaPost.comments.length;
-  kekstaPostToRenderLink.addEventListener('click', (evt) => {
+const createPost = (postData) => {
+  const pictureTemplateRender = pictureTemplate.cloneNode(true);
+  const nodeImage = pictureTemplateRender.querySelector('.picture__img');
+  const formLikes = pictureTemplateRender.querySelector('.picture__likes');
+  const postComments = pictureTemplateRender.querySelector('.picture__comments');
+  const postLink = pictureTemplateRender.querySelector('a');
+  nodeImage.src = postData.url;
+  formLikes.textContent = postData.likes;
+  postComments.textContent = postData.comments.length;
+  postLink.addEventListener('click', (evt) => {
     evt.preventDefault();
     showBigPicture();
-    renderbigPicture(kekstaPost);
+    renderbigPicture(postData);
   });
-  return kekstaPostToRender;
+  return pictureTemplateRender;
 };
-const renderKekstaPosts = (kekstaPosts) => {
+const renderPosts = (postData) => {
   const postsContainer = document.querySelector('.pictures');
-  const allKekstaPosts = document.createDocumentFragment();
-  kekstaPosts.forEach((post) => {
-    allKekstaPosts.append(createKekstaPost(post));
+  const allPosts = document.createDocumentFragment();
+  postData.forEach((post) => {
+    allPosts.append(createPost(post));
   });
 
-  postsContainer.append(allKekstaPosts);
+  postsContainer.append(allPosts);
 };
 const randomSorting = (indexA, indexB) => {
   const newIndexA = getRandomIntegerNumber() + indexA.id;
@@ -139,26 +139,26 @@ const randomSorting = (indexA, indexB) => {
 
 const sortByComments = (postA, postB) => postB.comments.length - postA.comments.length;
 
-const clearKekstaPosts = () => {
-  const kekstaPosts = document.querySelectorAll('.picture');
-  kekstaPosts.forEach((post) => post.remove());
+const clearPosts = () => {
+  const postData = document.querySelectorAll('.picture');
+  postData.forEach((post) => post.remove());
 };
 
-const reRenderKekstaPosts = (kekstaPost, option) => {
-  clearKekstaPosts();
+const reRenderPosts = (postData, option) => {
+  clearPosts();
   switch (true) {
     case (option === UserFilter.RANDOM):
-      renderKekstaPosts(kekstaPost
+      renderPosts(postData
         .slice(0, NUMBER_OF_RANDOM_POSTS)
         .sort(randomSorting));
       break;
     case (option === UserFilter.DISCUSSED):
-      renderKekstaPosts(kekstaPost
+      renderPosts(postData
         .slice()
         .sort(sortByComments));
       break;
     case (option === UserFilter.DEFAULT):
-      renderKekstaPosts(kekstaPost);
+      renderPosts(postData);
       break;
   }
 };
@@ -167,10 +167,10 @@ const makeFilterVissuallyActive = (clickedFilter) => {
   clickedFilter.classList.add('img-filters__button--active');
 };
 
-const setFiltersClick = (kekstaposts) => {
+const setFiltersClick = (postData) => {
   sortingFilter.forEach((filter) => {
     filter.addEventListener('click', debounce((evt) => {
-      reRenderKekstaPosts(kekstaposts, evt.target.id);
+      reRenderPosts(postData, evt.target.id);
     }));
     filter.addEventListener('click', (evt) => {
       makeFilterVissuallyActive(evt.target);
@@ -178,4 +178,4 @@ const setFiltersClick = (kekstaposts) => {
   });
 };
 
-export { renderKekstaPosts, renderbigPicture, setFiltersClick };
+export { renderPosts, renderbigPicture, setFiltersClick };
