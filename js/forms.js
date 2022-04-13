@@ -7,7 +7,7 @@ import { SuccessMessage, ErrorMessage } from './data.js';
 import { returnToDefault } from './photo_filter.js';
 const uploadedImage = document.querySelector('.img-upload__input');
 const uploadPreview = document.querySelector('.img-upload__preview');
-const previewImage = uploadPreview.querySelector('img');
+const uploadPreviewElement = uploadPreview.querySelector('img');
 const effectsImagesList = document.querySelectorAll('.effects__preview');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const imgUploadCancelButton = document.querySelector('.img-upload__cancel');
@@ -50,11 +50,19 @@ const setRemoveAtribute = () => {
   uploadFormButton.removeAttribute('disabled');
 };
 
+const checkFocus = () => document.activeElement !== hashtagsInput && document.activeElement !== decriptionInput;
+
 const onCancelBtnClick = () => {
   imgUploadOverlay.classList.add('hidden');
   mainWindow.classList.remove('modal-open');
   returnToDefault();
-  document.removeEventListener('keyup', onEscape);
+};
+
+const onEscape = (evt) => {
+  if (isEscapeKey(evt) && checkFocus()) {
+    onCancelBtnClick();
+    document.removeEventListener('keyup', onEscape);
+  }
 };
 
 const showImgUpload = () => {
@@ -64,14 +72,6 @@ const showImgUpload = () => {
   document.addEventListener('keyup', onEscape);
   imgUploadCancelButton.addEventListener('click', onCancelBtnClick);
 };
-
-const checkFocus = () => document.activeElement !== hashtagsInput && document.activeElement !== decriptionInput;
-
-function onEscape(evt) {
-  if (isEscapeKey(evt) && checkFocus()) {
-    onCancelBtnClick();
-  }
-}
 
 uploadedImage.addEventListener('change', (evt) => {
   const target = evt.target;
@@ -83,11 +83,11 @@ uploadedImage.addEventListener('change', (evt) => {
   }
   const fileReader = new FileReader();
   fileReader.addEventListener('load', () => {
-    loadImageToUpload(previewImage, fileReader, effectsImagesList);
+    loadImageToUpload(uploadPreviewElement, fileReader, effectsImagesList);
   });
   fileReader.readAsDataURL(target.files[0]);
 });
 
 export {
-  setRemoveAtribute, showImgUpload, previewImage, imgUploadEffectLevel, hashtagsInput, decriptionInput, uploadedImage, imgUploadOverlay, uploadForm
+  setRemoveAtribute, showImgUpload, uploadPreviewElement, imgUploadEffectLevel, hashtagsInput, decriptionInput, uploadedImage, imgUploadOverlay, uploadForm
 };

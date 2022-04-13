@@ -18,11 +18,7 @@ const getRandomIntegerNumber = (startNumber = GET_RANDOM_INTEGER_DEFAULT_START, 
   return Math.floor(Math.random() * (auxLastNumber - auxStartNumber)) + auxStartNumber;
 };
 
-const checkStringLength = (currentString, maxLength) => currentString.length <= maxLength;
-
-function getHashtagsArray(hashtagsString) {
-  return hashtagsString.split(REG_EXP_FOR_HASHTAGS_ARRAY);
-}
+const getHashtagsArray = (hashtagsString) => hashtagsString.split(REG_EXP_FOR_HASHTAGS_ARRAY);
 
 const getRandomArrayElement = (array) => array[getRandomIntegerNumber(0, array.length - 1)];
 
@@ -65,18 +61,18 @@ const showFinalMessage = (messageProps) => {
   }
 };
 
-function debounce(callback, timeoutDelay = RERENDER_DELAY) {
+const debounce = (callback, timeoutDelay = RERENDER_DELAY) => {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
-}
+};
 
 const showImageFilters = () => {
   imageFilters.classList.remove('img-filters--inactive');
 };
 
 export {
-  getRandomIntegerNumber, checkStringLength, getRandomArrayElement, getHashtagsArray, isEscapeKey, getDataError, showFinalMessage, debounce, showImageFilters
+  getRandomIntegerNumber, getRandomArrayElement, getHashtagsArray, isEscapeKey, getDataError, showFinalMessage, debounce, showImageFilters
 };

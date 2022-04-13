@@ -43,4 +43,4 @@ const sendData = (onSuccess, onFail, body) => {
       onFail();
     });
 };
-export { getData,sendData};
+export { getData, sendData };
