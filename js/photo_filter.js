@@ -1,5 +1,5 @@
-import { previewImage, uploadedImage } from './forms.js';
-import { photoFilters, SCALE_MAX_SIZE, SCALE_MIN_SIZE, SCALE_STEP, NON_EFFECT_FIELD_ID } from './data.js';
+import { uploadPreviewElement, uploadedImage } from './forms.js';
+import { photoFilters, SCALE_MAX_SIZE, SCALE_MIN_SIZE, SCALE_STEP, NON_EFFECT_FIELD_ID, GET_RANDOM_INTEGER_DEFAULT_END } from './data.js';
 import { imgUploadEffectLevel } from './forms.js';
 import { uploadForm } from './forms.js';
 const sliderElement = document.querySelector('.effect-level__slider');
@@ -13,16 +13,16 @@ let scale = 1;
 scaleBiggerButton.addEventListener('click', () => {
   if (scale < SCALE_MAX_SIZE) {
     scale += SCALE_STEP;
-    scaleControlValue.value = `${scale * 100}%`;
-    previewImage.style.transform = `scale(${scale})`;
+    scaleControlValue.value = `${scale * GET_RANDOM_INTEGER_DEFAULT_END}%`;
+    uploadPreviewElement.style.transform = `scale(${scale})`;
   }
 });
 
 scaleSmallerButton.addEventListener('click', () => {
   if (scale > SCALE_MIN_SIZE) {
     scale -= SCALE_STEP;
-    scaleControlValue.value = `${scale * 100}%`;
-    previewImage.style.transform = `scale(${scale})`;
+    scaleControlValue.value = `${scale * GET_RANDOM_INTEGER_DEFAULT_END}%`;
+    uploadPreviewElement.style.transform = `scale(${scale})`;
   }
 });
 
@@ -37,12 +37,12 @@ noUiSlider.create(sliderElement, {
 });
 
 sliderElement.noUiSlider.on('update', () => {
-  previewImage.style.filter = photoFilters.getTotalString(sliderElement.noUiSlider.get());
+  uploadPreviewElement.style.filter = photoFilters.getTotalString(sliderElement.noUiSlider.get());
   effectLevelValue.value = sliderElement.noUiSlider.get();
 });
 
 const updateFilterSetting = (photoFilter) => {
-  previewImage.style.filter = 'none';
+  uploadPreviewElement.style.filter = 'none';
   photoFilters.property = photoFilters[photoFilter].name;
   sliderElement.noUiSlider.updateOptions(photoFilters[photoFilter]);
   imgUploadEffectLevel.classList.remove('hidden');
@@ -53,7 +53,7 @@ effectsList.forEach((effect) => {
     const photoFilter = evt.target.id.split('-')[1];
     updateFilterSetting(photoFilter);
     if (evt.target.id === NON_EFFECT_FIELD_ID) {
-      previewImage.style.filter = 'none';
+      uploadPreviewElement.style.filter = 'none';
       imgUploadEffectLevel.classList.add('hidden');
     }
   });
@@ -62,8 +62,8 @@ effectsList.forEach((effect) => {
 const returnToDefault = () => {
   scale = 1;
   uploadForm.reset();
-  previewImage.style.transform = 'scale(1)';
-  previewImage.style.filter = 'none';
+  uploadPreviewElement.style.transform = 'scale(1)';
+  uploadPreviewElement.style.filter = 'none';
   uploadedImage.value = '';
 };
 

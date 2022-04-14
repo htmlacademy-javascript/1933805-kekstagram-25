@@ -1,6 +1,7 @@
 import { getDataError } from './util.js';
 import { UPLOAD_URL, DOWNLOAD_URL } from './data.js';
 import { showImageFilters } from './util.js';
+import { setRemoveAtribute } from './forms.js';
 
 const getData = (onSuccess) => {
   fetch(DOWNLOAD_URL)
@@ -32,12 +33,14 @@ const sendData = (onSuccess, onFail, body) => {
     .then((response) => {
       if (response.ok) {
         onSuccess();
+        setRemoveAtribute();
       } else {
         onFail();
+        setRemoveAtribute();
       }
     })
     .catch(() => {
       onFail();
     });
 };
-export { getData,sendData};
+export { getData, sendData };
